@@ -14,11 +14,18 @@ class UserController extends AbstractController
         $user = $this->getUser();
         $id = $user->getId();
         $username = $user->getUsername();
+        $lastname = $user->getLastName();
+        $firstname = $user->getFirstName();
+        $avatar = $user->getAvatar();
+
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'user',
             'username' => $username,
-            'id' => $id
+            'id' => $id,
+            'avatar' => $avatar,
+            'lastname' => $lastname,
+            'firstname' => $firstname
         ]);
     }
 }

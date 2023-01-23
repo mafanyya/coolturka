@@ -1,0 +1,13 @@
+{% extends 'root/index.html.twig' %}
+
+{% block content %}
+    <h1>Dodawanie aktualności</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    <button type="submit" class="btn">Add</button>
+    {{ form_end(form) }}
+
+
+{% endblock %}

@@ -1,6 +1,22 @@
 {% extends 'root/index.html.twig' %}
 
 {% block content %}
-<h1>Witamy, {{ username }}!</h1>
-<h1>Twój id to {{ id }}</h1>
+    <h1>Username: {{ username }}</h1>
+    <h1>Nazwisko: {{ lastname }}</h1>
+    <h1>Imię: {{ firstname }}</h1>
+{#    <img class = "avatar" src="{{ avatar }}" alt="">#}
+    <a href="{{ path('admin_panel') }}">Panel administratora</a>
+
+
+{#    {% if is_granted('ROLE_ADMIN') %}#}
+{#        <a href="{{ path('admin_panel') }}">Panel administratora</a>#}
+{#    {%endif%}#}
+{% endblock %}
+
+{% block style %}
+    <style>
+        .avatar{
+            width:50px;
+        }
+    </style>
 {% endblock %}

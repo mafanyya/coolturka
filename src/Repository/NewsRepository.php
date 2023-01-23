@@ -30,7 +30,7 @@ class NewsRepository extends ServiceEntityRepository
         }
     }
 
-    public function remove(News $entity, bool $flush = false): void
+    public function remove(News $entity, bool $flush = true): void
     {
         $this->getEntityManager()->remove($entity);
 

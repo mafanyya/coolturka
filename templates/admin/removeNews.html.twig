@@ -1,0 +1,14 @@
+{% extends 'root/index.html.twig' %}
+
+{% block content %}
+    <h1>Usuwanie aktualności</h1>
+
+    {% for new in news %}
+        <div class="news">
+            <p>{{ new.title }}</p>
+            <a href="/remove-news/{{ new.id }}">Usuń</a>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

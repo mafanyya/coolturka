@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\News;
+use App\Repository\NewsRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,6 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class NewsController extends AbstractController
 {
+
+
+
     #[Route('/create-news', name: 'create-news')]
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -18,6 +22,7 @@ class NewsController extends AbstractController
         $news = new News();
         $news->setTitle('Coś ważnego się wydarzyło');
         $news->setContent('To bardzo ważne wydarzenie, ');
+
         $entityManager->persist($news);
 
         $news2 = new News();
@@ -25,10 +30,13 @@ class NewsController extends AbstractController
         $news2->setContent('To bardzo ważne wydarzenie, ');
         $entityManager->persist($news2);
 
+        $news = $doctrine->getRepository(News::class)->
+
 
 
         $entityManager->flush();
 
         return new Response('Saved new news');
     }
+
 }
