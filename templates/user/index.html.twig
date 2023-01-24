@@ -5,12 +5,11 @@
     <h1>Nazwisko: {{ lastname }}</h1>
     <h1>Imię: {{ firstname }}</h1>
 {#    <img class = "avatar" src="{{ avatar }}" alt="">#}
-    <a href="{{ path('admin_panel') }}">Panel administratora</a>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a href="{{ path('admin_panel') }}">Panel administratora</a>
+    {%endif%}
 
 
-{#    {% if is_granted('ROLE_ADMIN') %}#}
-{#        <a href="{{ path('admin_panel') }}">Panel administratora</a>#}
-{#    {%endif%}#}
 {% endblock %}
 
 {% block style %}

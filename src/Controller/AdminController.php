@@ -18,7 +18,7 @@ class AdminController extends AbstractController
     private $newsRepository;
 
 
-    public function __construct( NewsRepository $newsRepository)
+    public function __construct(NewsRepository $newsRepository)
     {
         $this->newsRepository = $newsRepository;
 
@@ -31,6 +31,7 @@ class AdminController extends AbstractController
 
         ]);
     }
+
 
     #[Route('/add-news', name: 'add_news')]
     public function add_news(Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
@@ -47,7 +48,7 @@ class AdminController extends AbstractController
             return $this->redirectToRoute('add_news');
         }
         return $this->render('admin/addNews.html.twig', [
-            'form'=>$form->createView()
+            'form' => $form->createView()
 
         ]);
     }
@@ -58,14 +59,13 @@ class AdminController extends AbstractController
         $news = $newsRepository->findAll();
 
         return $this->render('admin/removeNews.html.twig', [
-            'news'=>$news
+            'news' => $news
 
         ]);
     }
 
     #[Route('/remove-news/{id}', name: 'remove-news/{id}')]
-
-    public function remove_news_id($id):Response
+    public function remove_news_id($id): Response
     {
         $news = $this->newsRepository->find($id);
 
