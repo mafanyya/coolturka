@@ -8,42 +8,52 @@
 {% block body %}
     <body>
     <div class="container">
-    {% block nav %}
-    <div class="nav">
-        <div class="nav-1">
-            <div class="logo">
-                <img src=" {{ asset('images/logo.png') }}" alt="">
-            </div>
-            <a href="{{ path('home') }}"  class = "nav-link">Główna</a>
-            <a href="{{ path('contest') }}" class = "nav-link">Konkursy</a>
-            <a href="{{ path('about') }}" class = "nav-link">O nas</a>
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('app_user') }}" class = "nav-link">Moje konto</a>
-            {% endif %}
-        </div>
-        <div class="nav-2">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                <a href="{{ path('app_logout') }}" class = "nav-link">Logout</a>
-            {% else %}
-                <a href="{{ path('app_register') }}" class = "nav-link">Zarejestruj</a>
-                <a href="{{ path('app_login') }}" class = "nav-link">Zaloguj</a>
-            {% endif %}
-        </div>
-    </div>
-    {% endblock %}
-    {% block content %}
-        <h1>Aktualności</h1>
-        <div class="news-wrapper">
-            {%  for new in news %}
-                <div class="news-content">
-                    <p class = "title"> {{ new.title }}</p>
-                    <p class = "content"> {{ new.content }}</p>
+        {% block nav %}
+            <div class="nav">
+                <div class="nav-1">
+                    <div class="logo">
+                        <img src=" {{ asset('images/logo.png') }}" alt="">
+                    </div>
+                    <a href="{{ path('home') }}" class="nav-link">Główna</a>
+                    <a href="{{ path('contest') }}" class="nav-link">Konkursy</a>
+                    <a href="{{ path('about') }}" class="nav-link">O nas</a>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_user') }}" class="nav-link">Moje konto</a>
+                    {% endif %}
                 </div>
+                <div class="nav-2">
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <a href="{{ path('app_logout') }}" class="nav-link">Logout</a>
+                    {% else %}
+                        <a href="{{ path('app_register') }}" class="nav-link">Zarejestruj</a>
+                        <a href="{{ path('app_login') }}" class="nav-link">Zaloguj</a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endblock %}
+        {% block content %}
+            <h1>Aktualności</h1>
+            <div class="news-wrapper">
+                {% for new in news %}
+                    <div class="news-content">
+                        <p class="title"> {{ new.title }}</p>
+                        <p class="content"> {{ new.content }}</p>
+                    </div>
 
-            {% endfor %}
-
-        </div>
-    {% endblock %}
+                {% endfor %}
+                <div class="news-wrapper">
+                    <h1>Nasze dzieci</h1>
+                    {% for child in children %}
+                        <div class="news-content">
+                            <p class="title"> {{ child.firstname }}</p>
+                            <p class="content"> {{ child.lastname }}</p>
+                            <p class="content"> Grupa: {{ child.grupa }}</p>
+                            <p class="content"> Rodzic: {{ child.parent.id }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}
     </div>
     </body>
 {% endblock %}

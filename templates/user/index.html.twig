@@ -1,10 +1,20 @@
 {% extends 'root/index.html.twig' %}
 
 {% block content %}
-    <h1>Username: {{ username }}</h1>
     <h1>Nazwisko: {{ lastname }}</h1>
     <h1>Imię: {{ firstname }}</h1>
-{#    <img class = "avatar" src="{{ avatar }}" alt="">#}
+
+    <div class="news-wrapper">
+        <h1>Moje dzieci:</h1>
+        {% for child in children %}
+            <div class="news-content">
+                <p class="title"> {{ child.firstname }}</p>
+                <p class="content"> {{ child.lastname }}</p>
+                <p class="content"> Grupa: {{ child.grupa }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
     {% if is_granted('ROLE_ADMIN') %}
         <a href="{{ path('admin_panel') }}">Panel administratora</a>
     {%endif%}

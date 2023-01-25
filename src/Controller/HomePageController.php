@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Child;
 use App\Entity\News;
 use App\Entity\User;
 use App\Form\AddNewsFormType;
 use App\Repository\UserRepository;
+use App\Repository\ChildRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,13 +20,19 @@ use Symfony\Component\Routing\Annotation\Route;
 class HomePageController extends AbstractController
 {
     #[Route('/', name: 'home')]
-    public function index( Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager): Response
+    public function index( Request $request, ManagerRegistry $doctrine, EntityManagerInterface $entityManager,
+                           ChildRepository $childRepository):
+    Response
     {
         $news = $doctrine->getRepository(News::class)->findAll();
+        $children = $doctrine->getRepository(Child::class)->findAll();
+
+
 
 
         return $this->render('root/index.html.twig', [
             'news'=> $news,
+            'children' => $children,
 
 
         ]);

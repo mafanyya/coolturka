@@ -23,6 +23,7 @@ class NewsController extends AbstractController
         $news->setTitle('Coś ważnego się wydarzyło');
         $news->setContent('To bardzo ważne wydarzenie, ');
 
+
         $entityManager->persist($news);
 
         $news2 = new News();

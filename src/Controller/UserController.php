@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\ChildRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -9,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
     #[Route('/user', name: 'app_user')]
-    public function index(): Response
+    public function index(ChildRepository $childRepository): Response
     {
         $user = $this->getUser();
         $id = $user->getId();
@@ -18,6 +19,8 @@ class UserController extends AbstractController
         $firstname = $user->getFirstName();
         $avatar = $user->getAvatar();
 
+        $children = $childRepository->findChildrenByParent($id);
+
 
         return $this->render('user/index.html.twig', [
             'controller_name' => 'user',
@@ -25,7 +28,8 @@ class UserController extends AbstractController
             'id' => $id,
             'avatar' => $avatar,
             'lastname' => $lastname,
-            'firstname' => $firstname
+            'firstname' => $firstname,
+            'children'  => $children
         ]);
     }
 }
